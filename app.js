@@ -1,15 +1,19 @@
 const random = require('random-bigint')
 const fs = require("fs")
 const test = 'test text'
-const outFileName = 'test.md'
-
+const outFileName = 'dataTable.json'
 let numA = random(120) 
 let numB = random(128) 
 let numC = random(128)
+const jsonObject = JSON.parse(fs.readFileSync(outFileName, 'utf8'))
+const dataTable = jsonObject
 
+console.log(dataTable)
 const reWrite = (value, fileName) =>{
   fs.writeFile(fileName, value, (err, data) => {
-    if(err) console.log(err);
+    let keyname = ''
+    let keyvalue = ''
+    if(err) console.log(err)
     else console.log('write end')
   })
 }
@@ -28,20 +32,29 @@ const solve = (num) =>{
     console.log(`[${i}]result is ${result}`)
     if(result.toString().length < 5 ||
       result == 114n || result == 165n || result == 390n ||result == 579n || result == 627n || result == 633n || result == 732n || result == 906n || result == 921n || result == 975n){
-      console.log(`numA = ${numA}`)
-      console.log(`numB = ${numB}`)
-      console.log(`numC = ${numC}`)
-      appendWrite(numA, numB, numC, result, outFileName)
-      i = 999
+      break
+    }
+    if(!(`${result}` in dataTable) && result > 0n){
+      console.log(`${result} is not in dataTable` )
+      let keyname = `${result}`
+      dataTable[keyname] = `${numA}, ${numB}, ${numC}`
+      console.log(`${keyname} :${dataTable[keyname]}`)
+      let val = 
+        JSON.stringify(dataTable).replace(/","/g, `",\n"`)
+      fs.writeFileSync(outFileName, val ,null,"\t")
     }
   }
 }
 
-solve(1500000)
-console.log(`${numA},\n${numB},\n${numC}`)
-console.log(numA.toString().length)
+solve(100)
 
 random(128, function(err, num) {
   if (err)
     throw err
 })
+
+
+// {
+//   "0" : "0,0,0"
+// }
+// sample data
