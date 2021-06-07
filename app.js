@@ -17,7 +17,7 @@ const reWrite = (value, fileName) =>{
 }
 
 const appendWrite = (a, b, c, sum, fileName) => {
-  fs.appendFileSync(fileName, `${sum}, ${a}, ${b}, ${c} \n`)
+  fs.appendFileSync(fileName, `${sum}, ${a}, -${b}, ${c} \n`)
   console.log("----SAVED VALUE----")
 }
 
