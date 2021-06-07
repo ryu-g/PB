@@ -7,8 +7,6 @@ let numB = random(128)
 let numC = random(128)
 const jsonObject = JSON.parse(fs.readFileSync(outFileName, 'utf8'))
 const dataTable = jsonObject
-
-console.log(dataTable)
 const reWrite = (value, fileName) =>{
   fs.writeFile(fileName, value, (err, data) => {
     let keyname = ''
@@ -24,29 +22,26 @@ const appendWrite = (a, b, c, sum, fileName) => {
 }
 
 const solve = (num) =>{
-  for (let i = 0; i < num ; i ++ ){
-    numA = random(72) 
-    numB = random(72)
-    numC = random(70) 
+  for (let i = 0; i < num ; i ++){
+    numA = random(10)
+    numB = random(10)
+    numC = random(10)
     let result =  numA**3n - numB**3n - numC**3n
     console.log(`[${i}]result is ${result}`)
     if(result.toString().length < 5 ||
       result == 114n || result == 165n || result == 390n ||result == 579n || result == 627n || result == 633n || result == 732n || result == 906n || result == 921n || result == 975n){
-      break
     }
     if(!(`${result}` in dataTable) && result > 0n){
-      console.log(`${result} is not in dataTable` )
+      // console.log(`${result} is not in dataTable` )
       let keyname = `${result}`
       dataTable[keyname] = `${numA}, ${numB}, ${numC}`
-      console.log(`${keyname} :${dataTable[keyname]}`)
-      let val = 
-        JSON.stringify(dataTable).replace(/","/g, `",\n"`)
-      fs.writeFileSync(outFileName, val ,null,"\t")
     }
   }
+  let val = JSON.stringify(dataTable).replace(/","/g, `",\n"`)
+  fs.writeFileSync(outFileName, val ,null,"\t")
 }
 
-solve(100)
+solve(500000)
 
 random(128, function(err, num) {
   if (err)
