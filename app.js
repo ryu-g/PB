@@ -31,10 +31,10 @@ const solve = (num) =>{
     if(result.toString().length < 5 ||
       result == 114n || result == 165n || result == 390n ||result == 579n || result == 627n || result == 633n || result == 732n || result == 906n || result == 921n || result == 975n){
     }
-    if(!(`${result}` in dataTable) && result > 0n){
+    if(!(`${result}` in dataTable) && result > 0n && result.toString().length < 5 ){
       // console.log(`${result} is not in dataTable` )
       let keyname = `${result}`
-      dataTable[keyname] = `${numA}, ${numB}, ${numC}`
+      dataTable[keyname] = `${numA}, -${numB}, ${numC}`
     }
   }
   let val = JSON.stringify(dataTable).replace(/","/g, `",\n"`)
