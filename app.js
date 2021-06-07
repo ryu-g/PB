@@ -23,16 +23,16 @@ const appendWrite = (a, b, c, sum, fileName) => {
 
 const solve = (num) =>{
   for (let i = 0; i < num ; i ++){
-    numA = random(10)
-    numB = random(10)
-    numC = random(10)
+    numA = random(8)
+    numB = random(7)
+    numC = random(6)
     let result =  numA**3n - numB**3n - numC**3n
     console.log(`[${i}]result is ${result}`)
     if(result.toString().length < 5 ||
       result == 114n || result == 165n || result == 390n ||result == 579n || result == 627n || result == 633n || result == 732n || result == 906n || result == 921n || result == 975n){
     }
-    if(!(`${result}` in dataTable) && result > 0n && result.toString().length < 5 ){
-      // console.log(`${result} is not in dataTable` )
+    if(!(`${result}` in dataTable) && result > 0n && result.toString().length < 4 ){
+      console.log(`[${i}]result is ${result}`)
       let keyname = `${result}`
       dataTable[keyname] = `${numA}, -${numB}, ${numC}`
     }
@@ -41,15 +41,9 @@ const solve = (num) =>{
   fs.writeFileSync(outFileName, val ,null,"\t")
 }
 
-solve(500000)
+solve(1000000)
 
 random(128, function(err, num) {
   if (err)
     throw err
 })
-
-
-// {
-//   "0" : "0,0,0"
-// }
-// sample data
